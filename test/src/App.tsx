@@ -1,22 +1,28 @@
 // src/App.tsx
-import { useTimer } from "./hooks/useTimer";
-import { ModeSelector } from "./components/ModeSelector";
-import { Timer } from "./components/Timer";
-import { TaskList } from "./components/TaskList";
+import { BrowserRouter, Routes, Route } from "react-router-dom"; 
+import { Navbar } from "./components/Navbar"
+import { Home } from "./pages/Home";
+import { Analytics } from "./pages/Analytics";
+import { Settings } from "./pages/Settings";
+import { useTimer } from "./hooks/useTimer"
 import "./App.css";
 
 function App() {
-  const { mode, timeLeft, isRunning, changeMode, toggleTimer, resetTimer } = useTimer();
-
+  const timer = useTimer();
+  
   return (
-    <div className={`app ${mode}`}>
-      <div className="container">
-        <h1>Pomodoro Timer</h1>
-        <ModeSelector currentMode={mode} onModeChange={changeMode} />
-        <Timer timeLeft={timeLeft} isRunning={isRunning} onToggle={toggleTimer} onReset={resetTimer} />
-        <TaskList />
+    <BrowserRouter>
+      <div className={`app ${timer.mode}`}>
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home timer={timer} />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

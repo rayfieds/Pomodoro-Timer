@@ -57,7 +57,7 @@ export function TaskList() {
         {tasks.map(task => (
           <li key={task.id} className={task.completed ? "completed" : ""}>
             <button className="checkbox" onClick={() => toggleTask(task.id)}>
-              {task.completed ? "✓" : ""}
+              {task.completed ? "✔" : ""}
             </button>
             <span className="task-text">{task.text}</span>
             <button className="delete-btn" onClick={() => deleteTask(task.id)}>

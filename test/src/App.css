@@ -10,16 +10,14 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Main app container - fills screen, transitions color smoothly */
+/* App wrapper */
 .app {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  padding-top: 80px;
+  flex-direction: column;
   transition: background-color 0.3s ease;
 }
 
-/* Background colors for each mode */
 .app.pomodoro {
   background-color: #ba4949;
 }
@@ -32,29 +30,115 @@ body {
   background-color: #397097;
 }
 
-/* Centered content container */
-.container {
+.app.pomodoro .timer-button {
+  color: #ba4949;
+}
+
+.app.shortBreak .timer-button {
+  color: #38858a;
+}
+
+.app.longBreak .timer-button {
+  color: #397097;
+}
+
+
+/* Page wrapper - remove background colors */
+.page {
+  min-height: calc(100vh - 56px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+}
+
+.navbar-content {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.1);
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Main content area */
+main {
+  flex: 1;
+  transition: background-color 0.3s ease;
+}
+
+/* Page wrapper */
+.page {
+  min-height: calc(100vh - 56px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.page.pomodoro {
+  background-color: #ba4949;
+}
+
+.page.shortBreak {
+  background-color: #38858a;
+}
+
+.page.longBreak {
+  background-color: #397097;
+}
+
+/* Timer container - the white-ish box */
+.timer-container {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 30px 20px;
   width: 100%;
   max-width: 480px;
   text-align: center;
+  margin-top: 20px;
 }
 
-h1 {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-/* Mode selector tabs */
+/* Mode selector - now outside the box */
 .mode-selector {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 30px;
 }
 
 .mode-button {
@@ -94,6 +178,14 @@ h1 {
   letter-spacing: -2px;
 }
 
+/* Button row */
+.timer-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 /* Start/Pause button */
 .timer-button {
   background-color: white;
@@ -108,38 +200,28 @@ h1 {
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
-/* Button color matches current mode */
-.app.pomodoro .timer-button {
+.page.pomodoro .timer-button {
   color: #ba4949;
 }
 
-.app.shortBreak .timer-button {
+.page.shortBreak .timer-button {
   color: #38858a;
 }
 
-.app.longBreak .timer-button {
+.page.longBreak .timer-button {
   color: #397097;
 }
 
-/* Button press effect */
 .timer-button:active {
   transform: translateY(4px);
   box-shadow: 0 2px 0 #d4d4d4;
 }
 
-/* Button row */
-.timer-buttons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-}
-
 /* Reset button */
 .reset-button {
   position: absolute;
+  right: -50px;
   background: transparent;
-  right : -50px;
   border: none;
   color: white;
   font-size: 1.8rem;
@@ -153,8 +235,27 @@ h1 {
   opacity: 1;
 }
 
+/* Status section */
+.status {
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+}
+
+.pomodoro-count {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.status p {
+  font-size: 1.1rem;
+  margin-top: 4px;
+}
+
 /* Task List */
 .task-list {
+  width: 100%;
+  max-width: 480px;
   margin-top: 30px;
   border-top: 2px solid rgba(255, 255, 255, 0.2);
   padding-top: 20px;
@@ -260,4 +361,20 @@ h1 {
 
 .delete-btn:hover {
   color: #e74c3c;
+}
+
+/* Analytics & Settings pages */
+.analytics-container,
+.settings-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 30px;
+  width: 100%;
+  max-width: 480px;
+  color: white;
+}
+
+.analytics-container h2,
+.settings-container h2 {
+  margin-bottom: 16px;
 }

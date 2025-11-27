@@ -18,31 +18,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.app.pomodoro {
-  background-color: #ba4949;
-}
-
-.app.shortBreak {
-  background-color: #38858a;
-}
-
-.app.longBreak {
-  background-color: #397097;
-}
-
-.app.pomodoro .timer-button {
-  color: #ba4949;
-}
-
-.app.shortBreak .timer-button {
-  color: #38858a;
-}
-
-.app.longBreak .timer-button {
-  color: #397097;
-}
-
-
 /* Page wrapper - remove background colors */
 .page {
   min-height: calc(100vh - 56px);
@@ -200,18 +175,6 @@ main {
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.page.pomodoro .timer-button {
-  color: #ba4949;
-}
-
-.page.shortBreak .timer-button {
-  color: #38858a;
-}
-
-.page.longBreak .timer-button {
-  color: #397097;
-}
-
 .timer-button:active {
   transform: translateY(4px);
   box-shadow: 0 2px 0 #d4d4d4;
@@ -367,6 +330,7 @@ main {
 .analytics-container,
 .settings-container {
   background-color: rgba(255, 255, 255, 0.1);
+  /* background-color: white; */
   border-radius: 8px;
   padding: 30px;
   width: 100%;
@@ -378,3 +342,231 @@ main {
 .settings-container h2 {
   margin-bottom: 16px;
 }
+
+/* Settings Page */
+.settings-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+  color: #333;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.reset-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.reset-btn:hover {
+  background: #c0392b;
+}
+
+/* Settings Sections */
+.settings-section {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.settings-section h3 {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Setting Rows */
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.setting-row label {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.setting-group {
+  margin-bottom: 16px;
+}
+
+.setting-group > label {
+  display: block;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+/* Time Inputs */
+.time-inputs {
+  display: flex;
+  gap: 12px;
+}
+
+.time-input {
+  flex: 1;
+}
+
+.time-input span {
+  display: block;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.time-input input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+/* Small Input */
+.small-input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+/* Select */
+.settings-container select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+/* Range Slider */
+.settings-container input[type="range"] {
+  width: 120px;
+  cursor: pointer;
+}
+
+/* Toggle Switch */
+.toggle {
+  width: 50px;
+  height: 26px;
+  background: #ddd;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.toggle.active {
+  background: #4caf50;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle.active .toggle-slider {
+  transform: translateX(24px);
+}
+
+/* Color Theme Buttons */
+.color-options {
+  display: flex;
+  gap: 8px;
+}
+
+.color-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.color-btn:hover {
+  transform: scale(1.1);
+}
+
+.color-btn.active {
+  border-color: #333;
+}
+
+/* Add at the top of App.css, after the reset */
+
+/* Theme colors */
+.app[data-theme="red"].pomodoro { background-color: #ba4949; }
+.app[data-theme="red"].shortBreak { background-color: #38858a; }
+.app[data-theme="red"].longBreak { background-color: #397097; }
+
+.app[data-theme="teal"].pomodoro { background-color: #38858a; }
+.app[data-theme="teal"].shortBreak { background-color: #397097; }
+.app[data-theme="teal"].longBreak { background-color: #ba4949; }
+
+.app[data-theme="purple"].pomodoro { background-color: #7c3aed; }
+.app[data-theme="purple"].shortBreak { background-color: #2563eb; }
+.app[data-theme="purple"].longBreak { background-color: #0891b2; }
+
+.app[data-theme="blue"].pomodoro { background-color: #2563eb; }
+.app[data-theme="blue"].shortBreak { background-color: #0891b2; }
+.app[data-theme="blue"].longBreak { background-color: #7c3aed; }
+
+/* Button colors per theme */
+.app[data-theme="red"].pomodoro .timer-button { color: #ba4949; }
+.app[data-theme="red"].shortBreak .timer-button { color: #38858a; }
+.app[data-theme="red"].longBreak .timer-button { color: #397097; }
+
+.app[data-theme="teal"].pomodoro .timer-button { color: #38858a; }
+.app[data-theme="teal"].shortBreak .timer-button { color: #397097; }
+.app[data-theme="teal"].longBreak .timer-button { color: #ba4949; }
+
+.app[data-theme="purple"].pomodoro .timer-button { color: #7c3aed; }
+.app[data-theme="purple"].shortBreak .timer-button { color: #2563eb; }
+.app[data-theme="purple"].longBreak .timer-button { color: #0891b2; }
+
+.app[data-theme="blue"].pomodoro .timer-button { color: #2563eb; }
+.app[data-theme="blue"].shortBreak .timer-button { color: #0891b2; }
+.app[data-theme="blue"].longBreak .timer-button { color: #7c3aed; }

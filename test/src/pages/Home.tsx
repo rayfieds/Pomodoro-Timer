@@ -2,18 +2,11 @@
 import { ModeSelector } from "../components/ModeSelector";
 import { Timer } from "../components/Timer";
 import { TaskList } from "../components/TaskList";
-
-interface TimerState {
-  mode: "pomodoro" | "shortBreak" | "longBreak";
-  timeLeft: number;
-  isRunning: boolean;
-  changeMode: (mode: "pomodoro" | "shortBreak" | "longBreak") => void;
-  toggleTimer: () => void;
-  resetTimer: () => void;
-}
+import type { TimerState, Settings } from "../types";
 
 interface HomeProps {
   timer: TimerState;
+  settings: Settings;
 }
 
 export function Home({ timer }: HomeProps) {
@@ -22,7 +15,7 @@ export function Home({ timer }: HomeProps) {
   return (
     <div className="page">
       <ModeSelector currentMode={mode} onModeChange={changeMode} />
-      
+
       <div className="timer-container">
         <Timer
           timeLeft={timeLeft}
@@ -32,12 +25,7 @@ export function Home({ timer }: HomeProps) {
         />
       </div>
 
-      {/* <div className="status">
-        <span className="pomodoro-count">#1</span>
-        <p>Time to focus!</p>
-      </div> */}
-
-      <TaskList />
+      <TaskList/>
     </div>
   );
 }

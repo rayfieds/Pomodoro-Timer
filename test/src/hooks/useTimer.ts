@@ -1,14 +1,7 @@
 // src/hooks/useTimer.ts
 import { useState, useEffect, useCallback } from "react";
-
-type Mode = "pomodoro" | "shortBreak" | "longBreak";
-
-// Time in seconds for each mode
-const MODE_TIMES: Record<Mode, number> = {
-  pomodoro: 25 * 60,     // 25 minutes
-  shortBreak: 5 * 60,    // 5 minutes
-  longBreak: 15 * 60,    // 15 minutes
-};
+import type { Mode, Settings } from "../types";
+import { THEME_COLORS } from "./useSettings";
 
 const MODE_LABELS: Record<Mode, string> = {
   pomodoro: "Time to focus!",
@@ -16,13 +9,6 @@ const MODE_LABELS: Record<Mode, string> = {
   longBreak: "Time for a break!",
 };
 
-const MODE_COLORS: Record<Mode, string> = {
-  pomodoro: "#ba4949",
-  shortBreak: "#38858a",
-  longBreak: "#397097",
-};
-
-// Helper to format seconds as MM:SS
 function formatTime(seconds: number): string {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
@@ -30,34 +16,50 @@ function formatTime(seconds: number): string {
 }
 
 function updateFavicon(color: string) {
-  // Create an SVG circle icon
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
       <circle cx="16" cy="16" r="14" fill="${color}" />
       <polyline points="16,8 16,16 22,16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
     </svg>
   `;
-  
-  // Convert to data URL
+
   const dataUrl = `data:image/svg+xml,${encodeURIComponent(svg)}`;
-  
-  // Find or create favicon link
+
   let favicon = document.querySelector("link[rel='icon']") as HTMLLinkElement;
   if (!favicon) {
     favicon = document.createElement("link");
     favicon.rel = "icon";
     document.head.appendChild(favicon);
   }
-  
+
   favicon.href = dataUrl;
 }
 
-export function useTimer() {
+export function useTimer(settings: Settings) {
+  // Get times from settings (convert minutes to seconds)
+  const getTimeForMode = useCallback((mode: Mode): number => {
+    switch (mode) {
+      case "pomodoro":
+        return settings.pomodoroTime * 60;
+      case "shortBreak":
+        return settings.shortBreakTime * 60;
+      case "longBreak":
+        return settings.longBreakTime * 60;
+    }
+  }, [settings.pomodoroTime, settings.shortBreakTime, settings.longBreakTime]);
+
   const [mode, setMode] = useState<Mode>("pomodoro");
-  const [timeLeft, setTimeLeft] = useState(MODE_TIMES[mode]);
+  const [timeLeft, setTimeLeft] = useState(getTimeForMode("pomodoro"));
   const [isRunning, setIsRunning] = useState(false);
 
-  // Countdown effect - runs every second when timer is active
+  // Update time when settings change
+  useEffect(() => {
+    if (!isRunning) {
+      setTimeLeft(getTimeForMode(mode));
+    }
+  }, [settings.pomodoroTime, settings.shortBreakTime, settings.longBreakTime, mode, isRunning, getTimeForMode]);
+
+  // Countdown effect
   useEffect(() => {
     if (!isRunning) return;
 
@@ -65,40 +67,42 @@ export function useTimer() {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           setIsRunning(false);
+          // TODO: Play alarm sound here
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
 
-    // Cleanup: clear interval when component unmounts or isRunning changes
     return () => clearInterval(interval);
   }, [isRunning]);
 
+  // Update browser tab title
   useEffect(() => {
     document.title = `${formatTime(timeLeft)} - ${MODE_LABELS[mode]}`;
   }, [timeLeft, mode]);
 
+  // Update favicon color based on theme
   useEffect(() => {
-    const color = isRunning ? MODE_COLORS[mode] : "#888888";
+    const themeColors = THEME_COLORS[settings.colorTheme];
+    const color = isRunning ? themeColors[mode] : "#888888";
     updateFavicon(color);
-  }, [mode, isRunning]);
+  }, [mode, isRunning, settings.colorTheme]);
 
-  // Reset timer when mode changes
   const changeMode = useCallback((newMode: Mode) => {
     setMode(newMode);
-    setTimeLeft(MODE_TIMES[newMode]);
+    setTimeLeft(getTimeForMode(newMode));
     setIsRunning(false);
-  }, []);
+  }, [getTimeForMode]);
 
   const toggleTimer = useCallback(() => {
     setIsRunning((prev) => !prev);
   }, []);
 
   const resetTimer = useCallback(() => {
-    setTimeLeft(MODE_TIMES[mode]);
+    setTimeLeft(getTimeForMode(mode));
     setIsRunning(false);
-  }, [mode]);
+  }, [mode, getTimeForMode]);
 
   return {
     mode,

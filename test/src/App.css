@@ -535,38 +535,28 @@ main {
   border-color: #333;
 }
 
-/* Add at the top of App.css, after the reset */
+.color-picker-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-/* Theme colors */
-.app[data-theme="red"].pomodoro { background-color: #ba4949; }
-.app[data-theme="red"].shortBreak { background-color: #38858a; }
-.app[data-theme="red"].longBreak { background-color: #397097; }
+.color-picker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
 
-.app[data-theme="teal"].pomodoro { background-color: #38858a; }
-.app[data-theme="teal"].shortBreak { background-color: #397097; }
-.app[data-theme="teal"].longBreak { background-color: #ba4949; }
+.color-picker-item span {
+  font-size: 0.9rem;
+  color: #555;
+}
 
-.app[data-theme="purple"].pomodoro { background-color: #7c3aed; }
-.app[data-theme="purple"].shortBreak { background-color: #2563eb; }
-.app[data-theme="purple"].longBreak { background-color: #0891b2; }
-
-.app[data-theme="blue"].pomodoro { background-color: #2563eb; }
-.app[data-theme="blue"].shortBreak { background-color: #0891b2; }
-.app[data-theme="blue"].longBreak { background-color: #7c3aed; }
-
-/* Button colors per theme */
-.app[data-theme="red"].pomodoro .timer-button { color: #ba4949; }
-.app[data-theme="red"].shortBreak .timer-button { color: #38858a; }
-.app[data-theme="red"].longBreak .timer-button { color: #397097; }
-
-.app[data-theme="teal"].pomodoro .timer-button { color: #38858a; }
-.app[data-theme="teal"].shortBreak .timer-button { color: #397097; }
-.app[data-theme="teal"].longBreak .timer-button { color: #ba4949; }
-
-.app[data-theme="purple"].pomodoro .timer-button { color: #7c3aed; }
-.app[data-theme="purple"].shortBreak .timer-button { color: #2563eb; }
-.app[data-theme="purple"].longBreak .timer-button { color: #0891b2; }
-
-.app[data-theme="blue"].pomodoro .timer-button { color: #2563eb; }
-.app[data-theme="blue"].shortBreak .timer-button { color: #0891b2; }
-.app[data-theme="blue"].longBreak .timer-button { color: #7c3aed; }
+.color-picker-item input[type="color"] {
+  width: 60px;
+  height: 36px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}

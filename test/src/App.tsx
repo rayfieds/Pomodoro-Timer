@@ -12,9 +12,15 @@ function App() {
   const { settings, updateSetting, resetSettings } = useSettings();
   const timer = useTimer(settings);
 
+  // Determine current background color based on mode
+  const backgroundColor = 
+    timer.mode === "pomodoro" ? settings.pomodoroColor :
+    timer.mode === "shortBreak" ? settings.shortBreakColor :
+    settings.longBreakColor;
+
   return (
     <BrowserRouter>
-      <div className={`app ${timer.mode}`} data-theme={settings.colorTheme}>
+      <div className="app" style={{ backgroundColor }}>
         <Navbar />
         <main>
           <Routes>

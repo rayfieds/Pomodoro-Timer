@@ -3,9 +3,6 @@
 // Timer modes
 export type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
-// Color theme options
-export type ColorTheme = "red" | "teal" | "purple" | "blue";
-
 // Sound options
 export type AlarmSound = "kitchen" | "bell" | "digital" | "none";
 export type TickingSound = "ticking" | "none";
@@ -23,7 +20,7 @@ export interface Task {
 // All settings
 export interface Settings {
   // Timer
-  pomodoroTime: number;      // in minutes
+  pomodoroTime: number;
   shortBreakTime: number;
   longBreakTime: number;
   autoStartBreaks: boolean;
@@ -36,13 +33,15 @@ export interface Settings {
 
   // Sound
   alarmSound: AlarmSound;
-  alarmVolume: number;       // 0-100
+  alarmVolume: number;
   alarmRepeat: number;
   tickingSound: TickingSound;
-  tickingVolume: number;     // 0-100
+  tickingVolume: number;
 
-  // Theme
-  colorTheme: ColorTheme;
+  // Theme - NEW: individual colors instead of preset themes
+  pomodoroColor: string;
+  shortBreakColor: string;
+  longBreakColor: string;
   hourFormat: HourFormat;
   darkModeWhenRunning: boolean;
 }

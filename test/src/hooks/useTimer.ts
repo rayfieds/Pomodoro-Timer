@@ -1,7 +1,6 @@
 // src/hooks/useTimer.ts
 import { useState, useEffect, useCallback } from "react";
 import type { Mode, Settings } from "../types";
-import { THEME_COLORS } from "./useSettings";
 
 const MODE_LABELS: Record<Mode, string> = {
   pomodoro: "Time to focus!",
@@ -52,12 +51,22 @@ export function useTimer(settings: Settings) {
   const [timeLeft, setTimeLeft] = useState(getTimeForMode("pomodoro"));
   const [isRunning, setIsRunning] = useState(false);
 
-  // Update time when settings change
-  useEffect(() => {
-    if (!isRunning) {
-      setTimeLeft(getTimeForMode(mode));
-    }
-  }, [settings.pomodoroTime, settings.shortBreakTime, settings.longBreakTime, mode, isRunning, getTimeForMode]);
+//   // Update time when settings change
+//   useEffect(() => {
+//   if (!isRunning) {
+//     const getTime = (m: Mode): number => {
+//       switch (m) {
+//         case "pomodoro":
+//           return settings.pomodoroTime * 60;
+//         case "shortBreak":
+//           return settings.shortBreakTime * 60;
+//         case "longBreak":
+//           return settings.longBreakTime * 60;
+//       }
+//     };
+//     setTimeLeft(getTime(mode));
+//   }
+// }, [settings.pomodoroTime, settings.shortBreakTime, settings.longBreakTime, mode, isRunning]);
 
   // Countdown effect
   useEffect(() => {
@@ -84,16 +93,28 @@ export function useTimer(settings: Settings) {
 
   // Update favicon color based on theme
   useEffect(() => {
-    const themeColors = THEME_COLORS[settings.colorTheme];
-    const color = isRunning ? themeColors[mode] : "#888888";
-    updateFavicon(color);
-  }, [mode, isRunning, settings.colorTheme]);
+  const color = isRunning 
+    ? (mode === "pomodoro" ? settings.pomodoroColor :
+       mode === "shortBreak" ? settings.shortBreakColor :
+       settings.longBreakColor)
+    : "#888888";
+  updateFavicon(color);
+}, [mode, isRunning, settings.pomodoroColor, settings.shortBreakColor, settings.longBreakColor]);
+
+  // const changeMode = useCallback((newMode: Mode) => {
+  //   setMode(newMode);
+  //   setTimeLeft(getTimeForMode(newMode));
+  //   setIsRunning(false);
+  // }, [getTimeForMode]);
 
   const changeMode = useCallback((newMode: Mode) => {
-    setMode(newMode);
-    setTimeLeft(getTimeForMode(newMode));
-    setIsRunning(false);
-  }, [getTimeForMode]);
+  setMode(newMode);
+  const newTime = newMode === "pomodoro" ? settings.pomodoroTime * 60
+    : newMode === "shortBreak" ? settings.shortBreakTime * 60
+    : settings.longBreakTime * 60;
+  setTimeLeft(newTime);
+  setIsRunning(false);
+}, [settings.pomodoroTime, settings.shortBreakTime, settings.longBreakTime]);
 
   const toggleTimer = useCallback(() => {
     setIsRunning((prev) => !prev);

@@ -1,6 +1,5 @@
 // src/pages/Settings.tsx
-import type { Settings as SettingsType, ColorTheme, AlarmSound, TickingSound, HourFormat } from "../types";
-import { THEME_COLORS } from "../hooks/useSettings";
+import type { Settings as SettingsType, AlarmSound, TickingSound, HourFormat } from "../types";
 
 interface SettingsProps {
   settings: SettingsType;
@@ -172,40 +171,56 @@ export function Settings({ settings, updateSetting, resetSettings }: SettingsPro
 
         {/* Theme Section */}
         <section className="settings-section">
-          <h3>🎨 Theme</h3>
+        <h3>🎨 Theme</h3>
 
-          <div className="setting-row">
-            <label>Color Theme</label>
-            <div className="color-options">
-              {(Object.keys(THEME_COLORS) as ColorTheme[]).map((color) => (
-                <button
-                  key={color}
-                  className={`color-btn ${settings.colorTheme === color ? "active" : ""}`}
-                  style={{ backgroundColor: THEME_COLORS[color].pomodoro }}
-                  onClick={() => updateSetting("colorTheme", color)}
+        <div className="setting-group">
+            <label>Color Themes</label>
+            <div className="color-picker-group">
+            <div className="color-picker-item">
+                <span>Pomodoro</span>
+                <input
+                type="color"
+                value={settings.pomodoroColor}
+                onChange={(e) => updateSetting("pomodoroColor", e.target.value)}
                 />
-              ))}
             </div>
-          </div>
+            <div className="color-picker-item">
+                <span>Short Break</span>
+                <input
+                type="color"
+                value={settings.shortBreakColor}
+                onChange={(e) => updateSetting("shortBreakColor", e.target.value)}
+                />
+            </div>
+            <div className="color-picker-item">
+                <span>Long Break</span>
+                <input
+                type="color"
+                value={settings.longBreakColor}
+                onChange={(e) => updateSetting("longBreakColor", e.target.value)}
+                />
+            </div>
+            </div>
+        </div>
 
-          <div className="setting-row">
+        <div className="setting-row">
             <label>Hour Format</label>
             <select
-              value={settings.hourFormat}
-              onChange={(e) => updateSetting("hourFormat", e.target.value as HourFormat)}
+            value={settings.hourFormat}
+            onChange={(e) => updateSetting("hourFormat", e.target.value as HourFormat)}
             >
-              <option value="24-hour">24-hour</option>
-              <option value="12-hour">12-hour</option>
+            <option value="24-hour">24-hour</option>
+            <option value="12-hour">12-hour</option>
             </select>
-          </div>
+        </div>
 
-          <div className="setting-row">
+        <div className="setting-row">
             <label>Dark Mode when Running</label>
             <Toggle
-              checked={settings.darkModeWhenRunning}
-              onChange={(checked) => updateSetting("darkModeWhenRunning", checked)}
+            checked={settings.darkModeWhenRunning}
+            onChange={(checked) => updateSetting("darkModeWhenRunning", checked)}
             />
-          </div>
+        </div>
         </section>
       </div>
     </div>

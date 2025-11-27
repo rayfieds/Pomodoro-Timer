@@ -30,30 +30,6 @@ const DEFAULT_SETTINGS: Settings = {
   darkModeWhenRunning: false,
 };
 
-// // Color values for each theme
-// export const THEME_COLORS: Record<ColorTheme, { pomodoro: string; shortBreak: string; longBreak: string }> = {
-//   red: {
-//     pomodoro: "#ba4949",
-//     shortBreak: "#38858a",
-//     longBreak: "#397097",
-//   },
-//   teal: {
-//     pomodoro: "#38858a",
-//     shortBreak: "#397097",
-//     longBreak: "#ba4949",
-//   },
-//   purple: {
-//     pomodoro: "#7c3aed",
-//     shortBreak: "#2563eb",
-//     longBreak: "#0891b2",
-//   },
-//   blue: {
-//     pomodoro: "#2563eb",
-//     shortBreak: "#0891b2",
-//     longBreak: "#7c3aed",
-//   },
-// };
-
 export function useSettings() {
   const [settings, setSettings] = useState<Settings>(() => {
     // Load from localStorage on first render

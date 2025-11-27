@@ -221,6 +221,16 @@ export function Settings({ settings, updateSetting, resetSettings }: SettingsPro
             onChange={(checked) => updateSetting("darkModeWhenRunning", checked)}
             />
         </div>
+        <button 
+                onClick={() => {
+                    updateSetting("pomodoroColor", "#ba4949");
+                    updateSetting("shortBreakColor", "#38858a");
+                    updateSetting("longBreakColor", "#397097");
+                }}
+                className="reset-colors-btn"
+            >
+                Reset Colors to Default
+            </button>
         </section>
       </div>
     </div>

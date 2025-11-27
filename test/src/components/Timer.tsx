@@ -4,8 +4,8 @@ interface TimerProps {
   isRunning: boolean;
   onToggle: () => void;
   onReset: () => void;
+  currentColor: string;
 }
-
 
 // Helper function to format seconds as MM:SS
 function formatTime(seconds: number): string {
@@ -14,12 +14,12 @@ function formatTime(seconds: number): string {
   return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 }
 
-export function Timer({ timeLeft, isRunning, onToggle, onReset }: TimerProps) {
+export function Timer({ timeLeft, isRunning, onToggle, onReset, currentColor }: TimerProps) {
   return (
     <div className="timer">
       <div className="timer-display">{formatTime(timeLeft)}</div>
       <div className="timer-buttons">
-        <button className="timer-button" onClick={onToggle}>
+        <button className="timer-button" onClick={onToggle} style= {{color:currentColor}}>
             {isRunning ? "PAUSE" : "START"}
         </button>
         {isRunning && (

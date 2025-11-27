@@ -9,8 +9,13 @@ interface HomeProps {
   settings: Settings;
 }
 
-export function Home({ timer }: HomeProps) {
+export function Home({ timer , settings}: HomeProps) {
   const { mode, timeLeft, isRunning, changeMode, toggleTimer, resetTimer } = timer;
+
+  const currentColor = 
+    mode === "pomodoro" ? settings.pomodoroColor :
+    mode === "shortBreak" ? settings.shortBreakColor :
+    settings.longBreakColor;
 
   return (
     <div className="page">
@@ -22,6 +27,7 @@ export function Home({ timer }: HomeProps) {
           isRunning={isRunning}
           onToggle={toggleTimer}
           onReset={resetTimer}
+          currentColor={currentColor}
         />
       </div>
 

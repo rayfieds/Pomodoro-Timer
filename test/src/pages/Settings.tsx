@@ -174,7 +174,7 @@ export function Settings({ settings, updateSetting, resetSettings }: SettingsPro
         <h3>🎨 Theme</h3>
 
         <div className="setting-group">
-            <label>Color Themes</label>
+            <label>Colour Themes</label>
             <div className="color-picker-group">
             <div className="color-picker-item">
                 <span>Pomodoro</span>
@@ -229,7 +229,7 @@ export function Settings({ settings, updateSetting, resetSettings }: SettingsPro
                 }}
                 className="reset-colors-btn"
             >
-                Reset Colors to Default
+                Reset Colours to Default
             </button>
         </section>
       </div>

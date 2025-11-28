@@ -6,6 +6,8 @@ import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { Analytics } from "./pages/Analytics";
 import { Settings } from "./pages/Settings";
+import { Login } from './pages/Login'
+
 import "./App.css";
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
                 />
               }
             />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </div>

@@ -581,3 +581,134 @@ main {
 .reset-colors-btn:active {
   transform: translateY(1px);
 }
+
+/* Login Page Styles */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: background-color;
+}
+
+.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container h1 {
+  text-align: center;
+  color: background-color;
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+.login-container h2 {
+  text-align: center;
+  color: background-color;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+
+.error-message {
+  background: #fee;
+  color: #c00;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ba4949;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #ba4949;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #a03838;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggle-auth {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #ba4949;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.toggle-btn:hover {
+  color: #a03838;
+}
+
+.user-email {
+  opacity: 0.9;
+  font-size: 0.85rem;
+}
+
+.user-email {
+  opacity: 0.9;
+  font-size: 0.85rem;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  border: none;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

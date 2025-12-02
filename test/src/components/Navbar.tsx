@@ -1,8 +1,10 @@
 // src/components/Navbar.tsx
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export function Navbar() {
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   return (
     <nav className="navbar">
@@ -21,6 +23,18 @@ export function Navbar() {
           >
             ⚙️ Settings
           </Link>
+          {user ? (
+            <>
+              <span className="nav-link user-email">{user.email}</span>
+              <button onClick={logout} className="nav-link logout-btn">
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className="nav-link login-btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

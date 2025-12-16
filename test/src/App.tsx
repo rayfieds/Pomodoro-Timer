@@ -27,7 +27,7 @@ function AppContent() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home timer={timer} settings={settings} />} />
-          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/analytics" element={<Analytics settings={settings}/>} />
           <Route
             path="/settings"
             element={
